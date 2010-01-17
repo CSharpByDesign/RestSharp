@@ -94,7 +94,7 @@ namespace RestSharp.Deserializers
 				if (type.IsPrimitive) {
           string tmpVal = value.ToString();
           if (tmpVal.Length > 0 && tmpVal[0] == '"')
-            tmpVal = tmpVal.Replace(@"\", String.Empty);
+            tmpVal = tmpVal.Replace("\"", String.Empty);
 
 					prop.SetValue(x, Convert.ChangeType(tmpVal, type), null);
 				}
