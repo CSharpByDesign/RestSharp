@@ -87,11 +87,16 @@ namespace RestSharp.Deserializers
 					value = json[actualName];
 				}
 
-				if (value == null)
+        //  If value is null, or if value = "{null}" do not continue
+				if (value == null || value.Type == JTokenType.Null)
 					continue;
 
 				if (type.IsPrimitive) {
-					prop.SetValue(x, Convert.ChangeType(value.ToString(), type), null);
+          string tmpVal = value.ToString();
+          if (tmpVal.Length > 0 && tmpVal[0] == '"')
+            tmpVal = tmpVal.Replace(@"\", String.Empty);
+
+					prop.SetValue(x, Convert.ChangeType(tmpVal, type), null);
 				}
 				else if (type == typeof(string)) {
 					string raw = value.ToString();
