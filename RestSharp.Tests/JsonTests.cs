@@ -47,6 +47,17 @@ namespace RestSharp.Tests
       Assert.Equal(new Guid("b1457983-8c5c-4c11-b10e-58585ed646d2"), p.Guid);
     }
 
+    [Fact]
+    public void Test_Json_MySql_Php_Date() {
+      var doc = new JObject();
+      doc["StartDate"] = "2010-01-10 14:23:54";
+
+      var d = new JsonDeserializer();
+      var p = d.Deserialize<PersonForJson>(doc.ToString());
+
+      Assert.Equal(DateTime.Parse("01-10-2010 14:23:54"), p.StartDate);
+    }
+
 		[Fact]
 		public void Can_Deserialize_Quoted_Primitive() {
 			var doc = new JObject();

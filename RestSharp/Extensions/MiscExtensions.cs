@@ -65,11 +65,8 @@ namespace RestSharp.Extensions
 				// because all whitespace is removed, match against newDate( instead of new Date(
 				return ExtractDate(input, @"newDate\((-?\d+)*\)");
 			}
-			else if (input.Matches(@"([0-9-])*T([0-9\:]*)Z?")) {
-				return ParseIso8601Date(input);
-			}
-
-			return default(DateTime);
+		  
+      return ParseIso8601Date(input);
 		}
 
 		private static DateTime ParseIso8601Date(string input) {
@@ -80,7 +77,8 @@ namespace RestSharp.Extensions
 				"yyyy-MM-ddTHH:mm:ssZ", 
 				"yyyy-MM-dd HH:mm:ssZ", 
 				"yyyy-MM-ddTHH:mm:ss", 
-				"yyyy-MM-ddTHH:mm:sszzzzzz"
+				"yyyy-MM-ddTHH:mm:sszzzzzz",
+        "yyyy-MM-dd HH:mm:ss"
 			};
 
 			DateTime date;
