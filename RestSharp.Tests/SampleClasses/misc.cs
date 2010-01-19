@@ -51,6 +51,9 @@ namespace RestSharp.Tests
 		public List<Friend> Friends { get; set; }
 		public Friend BestFriend { get; set; }
     public Guid Guid { get; set; }
+    public DateTime? NullableDate { get; set; }
+    public DateTime? NullableRealDate { get; set; }
+    
 
 		protected string Ignore { get; set; }
 		public string IgnoreProxy { get { return Ignore; } }

@@ -48,7 +48,25 @@ namespace RestSharp.Tests
     }
 
     [Fact]
-    public void Test_Json_MySql_Php_Date() {
+    public void Can_Handle_Nullable_DateTime() {
+      //  TODO:  Something is wrong with the ... ? ... of the ExtractDate function.  It's ?rounding?  Swap comments
+      //  on the following two lines of code, and this test will fail because the resolution is lost.
+      //DateTime? dt = DateTime.Now;
+      DateTime? dt = DateTime.Parse("01-01-2010 22:47:00");
+
+      var doc = new JObject();
+      doc["NullableDate"] = null;
+      doc["NullableRealDate"] = dt;
+
+      var d = new JsonDeserializer();
+      var p = d.Deserialize<PersonForJson>(doc.ToString());
+
+      Assert.Equal(null, p.NullableDate);
+      Assert.Equal(dt, p.NullableRealDate);
+    }
+
+    [Fact]
+    public void Can_Deserialize_Json_MySql_Php_Date() {
       var doc = new JObject();
       doc["StartDate"] = "2010-01-10 14:23:54";
 

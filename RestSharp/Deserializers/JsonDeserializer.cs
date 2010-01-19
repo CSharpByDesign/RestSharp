@@ -103,11 +103,13 @@ namespace RestSharp.Deserializers
 				else if (type == typeof(DateTime)) {
 					var dt = value.ToString().ParseJsonDate();
 					prop.SetValue(x, dt, null);
-				}
-				else if (type == typeof(Decimal)) {
-					var dec = Decimal.Parse(value.ToString());
-					prop.SetValue(x, dec, null);
-				} else if (type == typeof(Guid)) {
+				} else if (type == typeof(DateTime?)) {
+          var dt = value.ToString().ParseJsonDate();
+          prop.SetValue(x, dt, null);
+        } else if (type == typeof(Decimal)) {
+          var dec = Decimal.Parse(value.ToString());
+          prop.SetValue(x, dec, null);
+        } else if (type == typeof(Guid)) {
           string raw = value.ToString();
           var guid = new Guid(raw.Substring(1, raw.Length - 2));
           prop.SetValue(x, guid, null);
